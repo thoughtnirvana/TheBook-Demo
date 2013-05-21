@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Book:
+  = @rating.book_id
+%p
+  %b User:
+  = @rating.user_id
+%p
+  %b Rating:
+  = @rating.rating
+
+= link_to 'Edit', edit_rating_path(@rating)
+\|
+= link_to 'Back', ratings_path
