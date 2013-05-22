@@ -1,14 +1,19 @@
 TheBookDemo::Application.routes.draw do
   devise_for :users
 
+  #match 'users/sign_out' => redirect('/users/sign_in')
+
   resources :ratings
 
 
   resources :books
 
 
-  resources :users
-
+  resources :users do
+    member do
+      get 'dashboard'
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -59,7 +64,7 @@ TheBookDemo::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'users#index'
+  root :to => 'books#index'
 
   # See how all your routes lay out with "rake routes"
 
