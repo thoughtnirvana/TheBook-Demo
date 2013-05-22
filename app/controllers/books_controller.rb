@@ -1,4 +1,15 @@
 class BooksController < ApplicationController
+
+  skip_before_filter :authenticate_user!, :only => [:index]
+  before_filter :validate_owner, :only => [:show, :edit, :update, :destroy]
+
+  def validate_owner
+    @book = Book.find(params[:id])
+    if @book.users.include? current_user
+      @can_edit = true
+    end
+  end
+
   # GET /books
   # GET /books.json
   def index
@@ -13,8 +24,6 @@ class BooksController < ApplicationController
   # GET /books/1
   # GET /books/1.json
   def show
-    @book = Book.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @book }
@@ -34,7 +43,10 @@ class BooksController < ApplicationController
 
   # GET /books/1/edit
   def edit
-    @book = Book.find(params[:id])
+    if !@can_edit
+      redirect_to books_path, :notice => "You are not allowed to edit the " +
+      "books that have been added by others."
+    end
   end
 
   # POST /books
@@ -56,7 +68,10 @@ class BooksController < ApplicationController
   # PUT /books/1
   # PUT /books/1.json
   def update
-    @book = Book.find(params[:id])
+    if !@can_edit
+      redirect_to books_path, :notice => "You are not allowed to edit the " +
+      "books that have been added by others."
+    end
 
     respond_to do |format|
       if @book.update_attributes(params[:book])
@@ -72,7 +87,10 @@ class BooksController < ApplicationController
   # DELETE /books/1
   # DELETE /books/1.json
   def destroy
-    @book = Book.find(params[:id])
+    if !@can_edit
+      redirect_to books_path, :notice => "You are not allowed to edit the " +
+      "books that have been added by others."
+    end
     @book.destroy
 
     respond_to do |format|

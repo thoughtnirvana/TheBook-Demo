@@ -14,4 +14,7 @@ class Rating < ActiveRecord::Base
   attr_accessible :book_id, :rating, :user_id
 
   validates :book_id, :user_id, :presence => true
+
+  belongs_to :book
+  belongs_to :user
 end

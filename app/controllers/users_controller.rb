@@ -5,7 +5,6 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    debugger
     @users = User.all
 
     respond_to do |format|
@@ -18,6 +17,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
+    @user_books = @user.books
 
     respond_to do |format|
       format.html # show.html.erb
@@ -43,7 +43,6 @@ class UsersController < ApplicationController
 
   # GET /users/1/dashboard
   def dashboard
-    debugger
     @user = User.find(params[:id])
   end
 

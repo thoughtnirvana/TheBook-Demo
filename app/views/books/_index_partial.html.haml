@@ -1,0 +1,25 @@
+- if !defined? books
+  - @books = @books
+- else
+  - @books = books
+
+%table
+  %tr
+    %th Title
+    %th Author
+    %th Isbn
+    %th
+    %th
+    %th
+
+  - @books.each do |book|
+    %tr
+      %td= link_to book.title, book
+      %td= book.author
+      %td= book.isbn
+
+%br
+- if user_signed_in?
+  = link_to 'New Book', new_book_path
+  - if defined? books
+    \|

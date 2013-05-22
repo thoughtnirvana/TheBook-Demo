@@ -1,4 +1,7 @@
 class RatingsController < ApplicationController
+
+  before_filter :authenticate_user!
+
   # GET /ratings
   # GET /ratings.json
   def index

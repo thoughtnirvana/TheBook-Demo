@@ -1,11 +1,15 @@
-%p#notice= notice
-
 %p
   %b Name:
   = @user.name
 %p
   %b Email:
   = @user.email
+
+%p Your Books
+- if @user_books.blank?
+  %p You haven't added any books yet.
+- else
+  = render :partial => 'books/index_partial', :locals => { :books => @user_books}
 
 = link_to 'Edit', edit_user_path(@user)
 \|

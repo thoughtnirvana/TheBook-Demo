@@ -38,4 +38,7 @@ class User < ActiveRecord::Base
                        :length => {:within => 6..40},
                        :on => :create
 
+  has_many :ratings
+  has_many :books, :through => :ratings, :source => :book
+
 end
