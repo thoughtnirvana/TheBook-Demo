@@ -41,4 +41,14 @@ class User < ActiveRecord::Base
   has_many :ratings
   has_many :books, :through => :ratings, :source => :book
 
+  #letsrate_rater
+
+  def read? book
+    if books.include? book
+      true
+    else
+      false
+    end
+  end
+
 end

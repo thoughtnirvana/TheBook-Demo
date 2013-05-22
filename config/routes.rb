@@ -1,4 +1,6 @@
 TheBookDemo::Application.routes.draw do
+  match '/rate' => 'rater#create', :as => 'rate'
+
   devise_for :users
 
   #match 'users/sign_out' => redirect('/users/sign_in')
@@ -9,7 +11,11 @@ TheBookDemo::Application.routes.draw do
   resources :books
 
 
-  resources :users
+  resources :users, :only => [:index, :show, :edit, :update] do
+    member do
+      put 'add_book'
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
