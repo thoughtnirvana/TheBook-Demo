@@ -8,12 +8,12 @@
 
   .field
     = f.label :title
-    = f.text_field :title
+    = f.text_field :title, :required => true
   .field
     = f.label :author
-    = f.text_field :author
+    = f.text_field :author, :required => true
   .field
     = f.label :isbn
-    = f.text_field :isbn
+    = f.text_field :isbn, :required => true
   .actions
     = f.submit 'Save'

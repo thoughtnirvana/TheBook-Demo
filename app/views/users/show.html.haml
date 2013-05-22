@@ -11,6 +11,6 @@
 - else
   = render :partial => 'books/index_partial', :locals => { :books => @user_books}
 
-= link_to 'Edit', edit_user_path(@user)
+= link_to 'Edit Profile', edit_user_path(@user)
 \|
-= link_to 'Back', users_path
+= link_to 'Back', :back
