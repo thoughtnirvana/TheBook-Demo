@@ -5,12 +5,13 @@
   %b Email:
   = @user.email
 
-%p Your Books
+%p #{@user.name}'s Books
 - if @user_books.blank?
   %p You haven't added any books yet.
 - else
   = render :partial => 'books/index_partial', :locals => { :books => @user_books}
 
-= link_to 'Edit Profile', edit_user_path(@user)
-\|
+- if @can_edit
+  = link_to 'Edit Profile', edit_user_path(@user)
+  \|
 = link_to 'Back', :back
