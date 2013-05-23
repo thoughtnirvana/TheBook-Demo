@@ -12,6 +12,8 @@
     %th Title
     %th Author
     %th Isbn
+    - if defined? show_user
+      %th Rating
     %th
     %th
     %th
@@ -27,4 +29,6 @@
             :class => 'add-book-link', :book_id => book.id, :user_id => current_user.id
         - else
           %td= "You have read this Book"
+      - if defined? show_user
+        %td= book.get_rating show_user
 

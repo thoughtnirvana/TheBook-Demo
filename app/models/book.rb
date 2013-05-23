@@ -27,4 +27,14 @@ class Book < ActiveRecord::Base
     Book.where('(lower(title) like ?) or (lower(author) like ?) or (lower(isbn) like ?)',
       "%#{search_term}%", "%#{search_term}%", "%#{search_term}%").order(:title).page(page)
   end
+
+  def get_rating user_id
+    user = User.find(user_id)
+    rating = ratings.where(:user_id => user_id).first
+    if rating and rating.rating
+      rating.rating
+    else
+      "Not Rated"
+    end
+  end
 end

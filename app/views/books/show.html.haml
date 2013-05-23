@@ -37,7 +37,7 @@
   - @book.ratings.each do |rating|
     %tr
       %td= link_to rating.user.name, rating.user
-      %td= rating.rating
+      %td= rating.rating ? rating.rating : "Not Rated"
       %br
 
 
