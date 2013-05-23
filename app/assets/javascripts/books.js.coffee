@@ -16,3 +16,15 @@ $ ->
         parent.append("<td>You have read this Book</td>")
     return false;
 
+  $('.select-rating').change () ->
+    rating = $(this).val()
+    book_id = this.getAttribute('book_id')
+    user_id = this.getAttribute('user_id')
+    $.ajax url: "/users/#{user_id}/rate_book", type: 'PUT', data: "book_id=#{book_id}&rating=#{rating}",
+    success: (d) ->
+      if d
+        $(".current-rating").text("Your rating - #{rating}")
+        $(".rating-label").text("Change your rating -")
+    return false;
+
+

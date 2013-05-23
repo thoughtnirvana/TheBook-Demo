@@ -3,8 +3,8 @@
 # Table name: ratings
 #
 #  id         :integer          not null, primary key
-#  book_id    :integer
-#  user_id    :integer
+#  book_id    :integer          not null
+#  user_id    :integer          not null
 #  rating     :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

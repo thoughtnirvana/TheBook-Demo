@@ -3,8 +3,6 @@ TheBookDemo::Application.routes.draw do
 
   devise_for :users
 
-  #match 'users/sign_out' => redirect('/users/sign_in')
-
   resources :ratings
 
   resources :books
@@ -12,6 +10,7 @@ TheBookDemo::Application.routes.draw do
   resources :users, :only => [:index, :show, :edit, :update] do
     member do
       put 'add_book'
+      put 'rate_book'
     end
   end
 

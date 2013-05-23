@@ -3,10 +3,9 @@
 # Table name: books
 #
 #  id         :integer          not null, primary key
-#  title      :string(255)
-#  author     :string(255)
-#  isbn       :string(255)
-#  user_id    :integer
+#  title      :string(255)      not null
+#  author     :string(255)      not null
+#  isbn       :string(255)      not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

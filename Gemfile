@@ -23,7 +23,6 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'haml-rails'
 gem 'annotate'
-gem 'letsrate'
 gem 'kaminari'
 
 # To use ActiveModel has_secure_password

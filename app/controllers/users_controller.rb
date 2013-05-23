@@ -60,11 +60,26 @@ class UsersController < ApplicationController
   end
 
   # PUT /users/1/add_book
-  # PUT /users/1/add_book.json
   def add_book
     @user = User.find(params[:id])
     @book = Book.find(params[:book_id])
     rating = Rating.new(user_id: @user.id, book_id: @book.id)
+    if rating.save!
+      render :json => true
+    else
+      render :json => false
+    end
+  end
+
+  # PUT /users/1/rate_book
+  def rate_book
+    @user = User.find(params[:id])
+    @book = Book.find(params[:book_id])
+    rating = Rating.where(user_id: @user.id, book_id: @book.id).first
+    if !rating
+      rating = Rating.new(user_id: @user.id, book_id: @book.id)
+    end
+    rating.rating = params[:rating]
     if rating.save!
       render :json => true
     else

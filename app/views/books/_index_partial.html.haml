@@ -23,13 +23,8 @@
       %td= book.isbn
       - if user_signed_in?
         - if !current_user.read? book
-          %td= link_to "Add this Book to your list", add_book_user_path(current_user, :book_id => book.id),
+          %td= link_to "Add this Book to your list", "#",
             :class => 'add-book-link', :book_id => book.id, :user_id => current_user.id
         - else
           %td= "You have read this Book"
 
-%br
-- if user_signed_in?
-  = link_to 'Add a new Book', new_book_path
-  - if defined? books
-    \|

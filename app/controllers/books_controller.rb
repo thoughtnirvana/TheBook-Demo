@@ -7,6 +7,7 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     if @book.users.include? current_user
       @can_edit = true
+      @current_user_rating = @book.ratings.where(:user_id => current_user.id).first
     end
   end
 

@@ -11,6 +11,39 @@
   = @book.isbn
 
 - if @can_edit
+  - if @current_user_rating and @current_user_rating.rating
+    %b.current-rating Your rating - #{@current_user_rating.rating}
+    %br
+    %b.rating-label Change your rating -
+  - else
+    %b.current-rating Your rating - You haven't rated this book yet
+    %br
+    %b.rating-label Rate this Book -
+  = select_tag "count",
+    "<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>".html_safe,
+    :class => 'select-rating', :book_id => @book.id, :user_id => current_user.id
+%p Users who have read this book -
+- if @book.ratings.blank?
+  %p No one has read this book yet.
+- else
+  %table
+    %tr
+      %th Name
+      %th Rating
+      %th
+      %th
+      %th
+
+  - @book.ratings.each do |rating|
+    %tr
+      %td= link_to rating.user.name, rating.user
+      %td= rating.rating
+      %br
+
+
+%br
+
+- if @can_edit
   = link_to 'Edit', edit_book_path(@book)
   \|
 = link_to 'Back', :back
