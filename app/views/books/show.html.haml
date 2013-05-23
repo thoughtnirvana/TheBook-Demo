@@ -19,7 +19,7 @@
     %b.current-rating Your rating - You haven't rated this book yet
     %br
     %b.rating-label Rate this Book -
-  = select_tag "count",
+  = select_tag "rating",
     "<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>".html_safe,
     :class => 'select-rating', :book_id => @book.id, :user_id => current_user.id
 %p Users who have read this book -

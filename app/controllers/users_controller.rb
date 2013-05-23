@@ -2,11 +2,19 @@ class UsersController < ApplicationController
 
   before_filter :authenticate_user!
   before_filter :validate_self, :only => [:show, :edit, :update]
+  before_filter :authenticate_admin, :only => [:admin_change_user_rating,
+                                               :admin_change_user_rating]
 
   def validate_self
     @user = User.find(params[:id])
     if @user.id == current_user.id
       @can_edit = true
+    end
+  end
+
+  def authenticate_admin
+    if !current_user.admin?
+      redirect_to root_url, :notice => "You are not authorized to access this page."
     end
   end
 
@@ -84,6 +92,31 @@ class UsersController < ApplicationController
       render :json => true
     else
       render :json => false
+    end
+  end
+
+  def admin_change_user_rating
+    @user = User.find(params[:user_id])
+    @book = Book.find(params[:book_id])
+    @current_rating = @book.get_rating @user.id
+  end
+
+  def admin_update_user_rating
+    @user = User.find(params[:user_id])
+    @book = Book.find(params[:book_id])
+    rating = Rating.where(user_id: @user.id, book_id: @book.id).first
+    if !rating
+      rating = Rating.new(user_id: @user.id, book_id: @book.id)
+    end
+    rating.rating = params[:rating]
+    respond_to do |format|
+      if rating.save!
+        format.html { redirect_to @user, notice: 'Rating was successfully updated.' }
+        format.json { render json: true }
+      else
+        format.html { redirect_to @user, error: 'Could not update the Rating.' }
+        format.json { render json: false }
+      end
     end
   end
 end

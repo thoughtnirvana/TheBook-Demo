@@ -11,6 +11,8 @@ TheBookDemo::Application.routes.draw do
     member do
       put 'add_book'
       put 'rate_book'
+      get 'admin_change_user_rating'
+      put 'admin_update_user_rating'
     end
   end
 

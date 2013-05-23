@@ -23,12 +23,16 @@
       %td= link_to book.title, book
       %td= book.author
       %td= book.isbn
+      - if defined? show_user
+        %td= book.get_rating show_user.id
       - if user_signed_in?
         - if !current_user.read? book
           %td= link_to "Add this Book to your list", "#",
             :class => 'add-book-link', :book_id => book.id, :user_id => current_user.id
         - else
           %td= "You have read this Book"
-      - if defined? show_user
-        %td= book.get_rating show_user
+        - if current_user.admin? and defined? show_user
+          %td= link_to "Change #{show_user.name}'s rating for this Book",
+            admin_change_user_rating_user_path(current_user, :user_id => show_user.id, :book_id => book.id)
+
 

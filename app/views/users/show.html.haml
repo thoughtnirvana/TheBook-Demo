@@ -9,7 +9,7 @@
 - if @user_books.blank?
   %p You haven't added any books yet.
 - else
-  = render :partial => 'books/index_partial', :locals => { :books => @user_books, :show_user => @user.id }
+  = render :partial => 'books/index_partial', :locals => { :books => @user_books, :show_user => @user }
 
 %br
 
