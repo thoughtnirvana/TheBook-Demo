@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user_books = @user.books
+    @user_books = @user.books.page params[:page]
 
     respond_to do |format|
       format.html # show.html.erb

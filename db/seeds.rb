@@ -38,6 +38,10 @@ book3 = Book.find_or_create_by_isbn!(title: "Fahrenheit 451: A Novel", author: "
 book4 = Book.find_or_create_by_isbn!(title: "The Wolves of Midwinter", author: "Anne Rice", isbn: "0385349963")
 book5 = Book.find_or_create_by_isbn!(title: "The Fountainhead", author: "Ayn Rand", isbn: "0451099567")
 book6 = Book.find_or_create_by_isbn!(title: "Atlas Shrugged", author: "Ayn Rand", isbn: "0786194014")
+Book.find_or_create_by_isbn!(title: "Book1", author: "Author1", isbn: "1234123981")
+Book.find_or_create_by_isbn!(title: "Book2", author: "Author2", isbn: "1234433981")
+Book.find_or_create_by_isbn!(title: "Book3", author: "Author3", isbn: "1234123111")
+Book.find_or_create_by_isbn!(title: "Book4", author: "Author4", isbn: "1564123981")
 
 Rating.find_or_create_by_user_id_and_book_id!(book_id: book1.id, user_id: user1.id)
 Rating.find_or_create_by_user_id_and_book_id!(book_id: book2.id, user_id: user2.id)

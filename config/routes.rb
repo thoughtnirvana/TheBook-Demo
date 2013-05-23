@@ -7,9 +7,7 @@ TheBookDemo::Application.routes.draw do
 
   resources :ratings
 
-
   resources :books
-
 
   resources :users, :only => [:index, :show, :edit, :update] do
     member do
