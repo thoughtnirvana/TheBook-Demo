@@ -27,7 +27,7 @@ if !admin
   admin.email = "admin@test.com"
   admin.name = "admin"
   admin.password = "test123"
-  admin.password = "test123"
+  admin.password_confirmation = "test123"
   admin.admin = true
   admin.save!
 end

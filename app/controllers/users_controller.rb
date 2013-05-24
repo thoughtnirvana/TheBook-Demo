@@ -14,18 +14,8 @@ class UsersController < ApplicationController
 
   def authenticate_admin
     if !current_user.admin?
-      redirect_to root_url, :notice => "You are not authorized to access this page."
-    end
-  end
-
-  # GET /users
-  # GET /users.json
-  def index
-    @users = User.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @users }
+      redirect_to root_url,
+        :notice => "You are not authorized to access this page." and return
     end
   end
 
@@ -44,7 +34,7 @@ class UsersController < ApplicationController
   def edit
     if !@can_edit
       redirect_to user_path(@user), :notice => "You are not allowed to edit the " +
-      "information of other users."
+      "information of other users." and return
     end
   end
 
@@ -53,7 +43,7 @@ class UsersController < ApplicationController
   def update
     if !@can_edit
       redirect_to user_path(@user), :notice => "You are not allowed to edit the " +
-      "information of other users."
+      "information of other users." and return
     end
 
     respond_to do |format|

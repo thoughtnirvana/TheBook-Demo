@@ -46,7 +46,7 @@ class BooksController < ApplicationController
   def edit
     if !@can_edit
       redirect_to books_path, :notice => "You are not allowed to edit the " +
-      "books that have been added by others."
+      "books that have been added by others." and return
     end
   end
 
@@ -71,7 +71,7 @@ class BooksController < ApplicationController
   def update
     if !@can_edit
       redirect_to books_path, :notice => "You are not allowed to edit the " +
-      "books that have been added by others."
+      "books that have been added by others." and return
     end
 
     respond_to do |format|
@@ -90,7 +90,7 @@ class BooksController < ApplicationController
   def destroy
     if !@can_edit
       redirect_to books_path, :notice => "You are not allowed to edit the " +
-      "books that have been added by others."
+      "books that have been added by others." and return
     end
     @book.destroy
 

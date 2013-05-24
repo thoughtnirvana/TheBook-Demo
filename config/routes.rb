@@ -7,7 +7,7 @@ TheBookDemo::Application.routes.draw do
 
   resources :books
 
-  resources :users, :only => [:index, :show, :edit, :update] do
+  resources :users, :only => [:show] do
     member do
       put 'add_book'
       put 'rate_book'
