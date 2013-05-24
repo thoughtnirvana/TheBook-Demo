@@ -1,18 +1,20 @@
 %br
 
-%b Changing #{@user.name}'s rating for #{@book.title}
+%legend Changing #{@user.name}'s rating for #{@book.title}
 
 %br
 
 %b Current Rating - #{@current_rating}
-%br
+
+.clear
+
 %b Change Rating -
-=form_tag admin_update_user_rating_user_path, :method => "put" do
+=form_tag admin_update_user_rating_user_path, :method => "put", :class => "form-search" do
   = select_tag "rating",
     "<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>".html_safe
   = hidden_field_tag :user_id, @user.id
   = hidden_field_tag :book_id, @book.id
   = submit_tag "Change", :name => nil,
-    :class => 'fg-button ui-button ui-state-default ui-corner-all'
+    :class => 'btn'
 
-= link_to 'Back', :back
+= link_to 'Back', :back, :class => 'btn'

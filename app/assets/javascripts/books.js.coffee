@@ -13,7 +13,7 @@ $ ->
       if d
         parent = $(orig_element).parent()
         $(orig_element).remove()
-        parent.append("<td>You have read this Book</td>")
+        parent.append("You have read this Book")
     return false;
 
   $('.select-rating').change () ->

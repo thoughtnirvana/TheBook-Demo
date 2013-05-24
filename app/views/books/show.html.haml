@@ -1,14 +1,13 @@
 %p#notice= notice
 
 %p
-  %b Title:
-  = @book.title
+  %b.lead Title: #{@book.title}
 %p
-  %b Author:
-  = @book.author
+  %b.lead Author: #{@book.author}
 %p
-  %b Isbn:
-  = @book.isbn
+  %b.lead Isbn: #{@book.isbn}
+
+.clear
 
 - if @can_edit
   - if @current_user_rating and @current_user_rating.rating
@@ -22,28 +21,27 @@
   = select_tag "rating",
     "<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>".html_safe,
     :class => 'select-rating', :book_id => @book.id, :user_id => current_user.id
-%p Users who have read this book -
+
+.clear
+
+
+%p.lead Users who have read this book -
 - if @book.ratings.blank?
-  %p No one has read this book yet.
+  %p.lead No one has read this book yet.
 - else
-  %table
+  %table.table.table-bordered
     %tr
       %th Name
       %th Rating
-      %th
-      %th
-      %th
 
-  - @book.ratings.each do |rating|
-    %tr
-      %td= link_to rating.user.name, rating.user
-      %td= rating.rating ? rating.rating : "Not Rated"
-      %br
+    - @book.ratings.each do |rating|
+      %tr
+        %td= link_to rating.user.name, rating.user
+        %td= rating.rating ? rating.rating : "Not Rated"
 
 
 %br
 
 - if @can_edit
-  = link_to 'Edit', edit_book_path(@book)
-  \|
-= link_to 'Back', :back
+  = link_to 'Edit', edit_book_path(@book), :class => 'btn'
+= link_to 'Back', :back, :class => 'btn'

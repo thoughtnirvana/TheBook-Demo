@@ -1,16 +1,16 @@
 %h1 Listing books
 
-%p Search Book by it's Title, Author or ISBN
+%legend Search Book by it's Title, Author or ISBN
 
-=form_tag books_path, :method => "get" do
+=form_tag books_path, :class => "form-search", :method => "get" do
   .search
     = text_field_tag 'search', '', value: params[:search]
     = submit_tag "Search", :name => nil,
-      :class => 'fg-button ui-button ui-state-default ui-corner-all'
+      :class => 'btn'
 
 = render :partial => 'index_partial'
 
 %br
 
 - if user_signed_in?
-  = link_to 'Add a new Book', new_book_path
+  = link_to 'Add a new Book', new_book_path, :class => 'btn'
