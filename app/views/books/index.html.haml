@@ -10,3 +10,7 @@
 
 = render :partial => 'index_partial'
 
+%br
+
+- if user_signed_in?
+  = link_to 'Add a new Book', new_book_path

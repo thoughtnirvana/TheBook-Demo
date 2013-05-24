@@ -11,7 +11,7 @@
 #
 
 class Book < ActiveRecord::Base
-  paginates_per 5
+  paginates_per 10
   attr_accessible :author, :isbn, :title
 
   validates :title, :author, :isbn, :presence => true
@@ -26,6 +26,22 @@ class Book < ActiveRecord::Base
     end
     Book.where('(lower(title) like ?) or (lower(author) like ?) or (lower(isbn) like ?)',
       "%#{search_term}%", "%#{search_term}%", "%#{search_term}%").order(:title).page(page)
+  end
+
+  def self.create_new(params, current_user=nil)
+    book = Book.new(params[:book])
+    Book.transaction do
+      begin
+        book.save!
+        if current_user
+          rating = Rating.new(user_id: current_user.id, book_id: book.id)
+          rating.save!
+        end
+      rescue ActiveRecord::RecordInvalid
+        raise ActiveRecord::Rollback
+      end
+    end
+    book
   end
 
   def get_rating user_id

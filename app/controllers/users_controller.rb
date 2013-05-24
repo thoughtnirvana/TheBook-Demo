@@ -81,14 +81,8 @@ class UsersController < ApplicationController
 
   # PUT /users/1/rate_book
   def rate_book
-    @user = User.find(params[:id])
-    @book = Book.find(params[:book_id])
-    rating = Rating.where(user_id: @user.id, book_id: @book.id).first
-    if !rating
-      rating = Rating.new(user_id: @user.id, book_id: @book.id)
-    end
-    rating.rating = params[:rating]
-    if rating.save!
+    rated = Rating.rate(params[:id], params[:book_id], params[:rating])
+    if rated
       render :json => true
     else
       render :json => false
@@ -102,15 +96,10 @@ class UsersController < ApplicationController
   end
 
   def admin_update_user_rating
+    rated = Rating.rate(params[:user_id], params[:book_id], params[:rating])
     @user = User.find(params[:user_id])
-    @book = Book.find(params[:book_id])
-    rating = Rating.where(user_id: @user.id, book_id: @book.id).first
-    if !rating
-      rating = Rating.new(user_id: @user.id, book_id: @book.id)
-    end
-    rating.rating = params[:rating]
     respond_to do |format|
-      if rating.save!
+      if rated
         format.html { redirect_to @user, notice: 'Rating was successfully updated.' }
         format.json { render json: true }
       else

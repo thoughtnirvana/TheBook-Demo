@@ -22,4 +22,19 @@ class Rating < ActiveRecord::Base
   belongs_to :book
   belongs_to :user
 
+  def self.rate(user_id, book_id, user_rating)
+    user =  User.find(user_id)
+    book = Book.find(book_id)
+    rating = Rating.where(user_id: user.id, book_id: book.id).first
+    if !rating
+      rating = Rating.new(user_id: user.id, book_id: book.id)
+    end
+    rating.rating = user_rating
+    if rating.save!
+      true
+    else
+      false
+    end
+  end
+
 end

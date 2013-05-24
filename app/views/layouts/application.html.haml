@@ -9,7 +9,7 @@
   %p{:class => "notice"}= notice
   %p{:class => "alert"}= alert
   %h2= link_to "TheBook", root_url
-  = link_to "See Trending Books", books_path
+  = link_to "See All Books", books_path
   - if user_signed_in?
     = link_to "Goto Your Dashboard", user_path(current_user)
     = link_to "Sign Out (#{current_user.name})",  destroy_user_session_path, :method => :delete
