@@ -5,7 +5,7 @@ user1 = User.find_by_email("test1@test.com")
 if !user1
   user1 = User.new
   user1.email = "test1@test.com"
-  user1.name = "testuser1"
+  user1.name = "Testuser1"
   user1.password = "test123"
   user1.password_confirmation = "test123"
   user1.save!
@@ -15,7 +15,7 @@ user2 = User.find_by_email("test2@test.com")
 if !user2
   user2 = User.new
   user2.email = "test2@test.com"
-  user2.name = "testuser2"
+  user2.name = "Testuser2"
   user2.password = "test123"
   user2.password_confirmation = "test123"
   user2.save!
@@ -25,7 +25,7 @@ admin = User.find_by_email("admin@test.com")
 if !admin
   admin = User.new
   admin.email = "admin@test.com"
-  admin.name = "admin"
+  admin.name = "Admin"
   admin.password = "test123"
   admin.password_confirmation = "test123"
   admin.admin = true
@@ -50,4 +50,22 @@ Rating.find_or_create_by_user_id_and_book_id!(book_id: book4.id, user_id: user2.
 Rating.find_or_create_by_user_id_and_book_id!(book_id: book5.id, user_id: user1.id)
 Rating.find_or_create_by_user_id_and_book_id!(book_id: book6.id, user_id: user2.id)
 
+# 50 users 1000 books
+for i in 1..50
+  user = User.find_by_email("user#{i}@test.com")
+  if !user
+    user = User.new
+    user.email = "user#{i}@test.com"
+    user.name = "User#{i}"
+    user.password = "test123"
+    user.password_confirmation = "test123"
+    user.save!
+  end
+end
+
+sample_isbn = 1000000005
+for i in 5..1005
+  Book.find_or_create_by_isbn!(title: "Book#{i}", author: "Author#{i}", isbn: "#{sample_isbn}")
+  sample_isbn+=1
+end
 
